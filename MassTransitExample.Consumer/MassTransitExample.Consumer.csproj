@@ -73,9 +73,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestMessageConsumer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestMessageConsumer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MassTransitExample.Messages\MassTransitExample.Messages.csproj">
