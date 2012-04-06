@@ -10,8 +10,10 @@ namespace MassTransitExample.Consumer
 			XmlConfigurator.Configure();
 			Console.Write("Starting consumer...");
 
-			var cons = new TestMessageConsumer("msmq://localhost/test_consumer");
-			
+			//var cons = new TestMessageConsumer();
+			var container = IoC.StructureMap.Init();
+			var consumer = container.GetInstance<TestMessageConsumer>();
+			consumer.Start();
 			Console.WriteLine("Started");
 
 
