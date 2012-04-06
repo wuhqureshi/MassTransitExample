@@ -22,11 +22,14 @@ namespace MassTransitExample.Publisher
 		/// </summary>
 		/// <param name="messageCount">Number of messages to send</param>
 		/// <param name="interval">interval between each message in milliseconds</param>
-		public void SendMessages(int messageCount, int interval)
+		public void SendMessages(int messageCount, int interval = 0)
 		{
 			for (int i = 1; i <= messageCount; i++)
 			{
-				Thread.Sleep(interval);
+				if (interval != 0)
+				{
+					Thread.Sleep(interval);
+				}
 				_bus.Publish(new TestMessage { Text = "This is my test message " + i });
 			}
 		}

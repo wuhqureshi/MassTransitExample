@@ -33,7 +33,7 @@ namespace MassTransitExample.Publisher
 			Console.WriteLine("Started");
 
 			var messagePublisher = new TestMessagePublisher(bus);
-			messagePublisher.SendMessages(50, 50);
+			messagePublisher.SendMessages(500);
 			
 			Console.WriteLine("Press a key to end publisher...");
 			Console.ReadKey();

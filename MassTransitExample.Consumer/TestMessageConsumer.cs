@@ -1,7 +1,9 @@
 using System;
 using MassTransit;
+using MassTransit.Distributor.Messages;
 using MassTransit.Transports.Msmq;
 using MassTransitExample.Messages;
+using MassTransit.Context;
 
 namespace MassTransitExample.Consumer
 {
@@ -21,7 +23,17 @@ namespace MassTransitExample.Consumer
 
 		public void Consume(TestMessage message)
 		{
-			Console.WriteLine(message.Text + " -- RemainingMessages: " + _management.Count() + " -- Error Count: " + _errorManageMent.Count());
+			var context = _bus.MessageContext<Distributed<TestMessage>>();
+			var retryCount = context.RetryCount;
+
+			if (retryCount == 0)
+			{
+				context.RetryLater();
+			}
+			else
+			{
+				Console.WriteLine(message.Text + " -- Retry Count: " + retryCount + " -- RemainingMessages: " + _management.Count() + " -- Error Count: " + _errorManageMent.Count());
+			}
 		}
 	}
 }
